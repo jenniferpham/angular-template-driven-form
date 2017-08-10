@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- Add a Form with the following Inputs (and Validators)
+           1) Mail address (should not be empty and should be an email address)
+           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           3) A Password field (should not be empty)
+           4) A Submit Button
+
+           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+
+           Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
+      <div class="alert-alert-danger" *ngIf="!f.valid && f.touched">
+        The form is invalid. Fill out all fields in correct format.
+      </div>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" ngModel name="email" required email class="form-control" #email="ngModel">
+          <p class="alert" *ngIf="!email.valid && email.touched">Must select one</p>
+        </div>
+
+
+         <div class="form-group">
+           <label for="level">Levels</label>
+          <select name="levels" id="levels" class="form-control" #levels="ngModel" [ngModel]="selectedLevel" required>
+            <option *ngFor="let l of allLevels" [value]="l">{{l}}</option>
+          </select>
+          <p class="alert" *ngIf="!levels.valid && levels.touched">Must select one</p>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" ngModel #password="ngModel" class="form-control" name="password" required>
+          <p class="alert" *ngIf="!password.valid && password.touched">Must select one</p>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
