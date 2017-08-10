@@ -21,5 +21,4 @@ export class AppComponent implements OnInit {
   onSubmit(form: NgForm){
     console.log(form);
   }
-
 }
